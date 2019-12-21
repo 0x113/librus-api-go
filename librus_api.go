@@ -22,23 +22,24 @@ type OKResponse struct {
 }
 
 type librusHeader struct {
-	key 	string
-	value string
+	Key 	string
+	Value string
 }
 
 var host = "https://api.librus.pl/"
 
-var headers = []librusHeader{
+var Headers = []librusHeader{
 	{
-		key: "Authorization",
-		value: "Basic Mjg6ODRmZGQzYTg3YjAzZDNlYTZmZmU3NzdiNThiMzMyYjE=",
+		Key: "Authorization",
+		Value: "Basic Mjg6ODRmZGQzYTg3YjAzZDNlYTZmZmU3NzdiNThiMzMyYjE=",
 	},
 	{
-		key:   "Content-Type",
-		value: "application/x-www-form-urlencoded",
+		Key:   "Content-Type",
+		Value: "application/x-www-form-urlencoded",
 	},
 }
 
+// Login method returns authorization token
 func (l *Librus) Login() error {
 	postData := url.Values{}
 	postData.Set("username", l.Username)
@@ -52,8 +53,8 @@ func (l *Librus) Login() error {
 	// request
 	req, err := http.NewRequest("POST", host+"OAuth/Token", strings.NewReader(postData.Encode()))
 	// add headers
-	for _, h := range headers {
-		req.Header.Set(h.key, h.value)
+	for _, h := range Headers {
+		req.Header.Set(h.Key, h.Value)
 	}
 
 	if err != nil {
@@ -80,7 +81,49 @@ func (l *Librus) Login() error {
 	}
 
 	// change authorization header
-	headers[0].value = "Bearer " + okResponse.AccessToken
+	Headers[0].Value = "Bearer " + okResponse.AccessToken
 
 	return nil
+}
+
+// GetData returns data from url e.g. https://api.librus.pl/2.0/LuckyNumbers
+func (l *Librus) GetData(url string) (*http.Response, error) {
+	// new http client
+	client := &http.Client{}
+	
+	// request
+	req, err := http.NewRequest("GET", host+"2.0/"+url, nil)
+	// add headers 
+	for _, h := range Headers {
+		req.Header.Set(h.Key, h.Value)
+	}
+
+	if err != nil {
+		return nil, err
+	}
+
+	// response
+	res, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}
+
+func (l *Librus) GetLuckyNumber() (*LuckyNumber, error) {
+	res, err := l.GetData("LuckyNumbers")
+	if err != nil {
+		return nil, err
+	}
+	defer res.Body.Close()
+
+	// get lucky number
+	luckyNumber := new(LuckyNumberResponse)
+	err = json.NewDecoder(res.Body).Decode(&luckyNumber)
+	if err != nil {
+		return nil, err
+	}
+
+	return luckyNumber.LuckyNumber, nil
 }
