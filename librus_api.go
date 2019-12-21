@@ -8,27 +8,9 @@ import (
 	"strings"
 )
 
-type Librus struct {
-	Username string
-	Password string
-}
-
-type OKResponse struct {
-	AccessToken  string `json:"access_token"`
-	TokenType    string `json:"token_type"`
-	ExpiresIn    int    `json:"expires_in"`
-	RefreshToken string `json:"refresh_token"`
-	AccountGroup int    `json:"account_group"`
-}
-
-type librusHeader struct {
-	Key 	string
-	Value string
-}
-
 var host = "https://api.librus.pl/"
 
-var Headers = []librusHeader{
+var Headers = []LibrusHeader{
 	{
 		Key: "Authorization",
 		Value: "Basic Mjg6ODRmZGQzYTg3YjAzZDNlYTZmZmU3NzdiNThiMzMyYjE=",

@@ -1,5 +1,23 @@
 package librus_api_go
 
+type Librus struct {
+	Username string
+	Password string
+}
+
+type OKResponse struct {
+	AccessToken  string `json:"access_token"`
+	TokenType    string `json:"token_type"`
+	ExpiresIn    int    `json:"expires_in"`
+	RefreshToken string `json:"refresh_token"`
+	AccountGroup int    `json:"account_group"`
+}
+
+type LibrusHeader struct {
+	Key 	string
+	Value string
+}
+
 type LuckyNumberResponse struct {
 	LuckyNumber *LuckyNumber           `json:"LuckyNumber"`
 	Resources   map[string]interface{} `json:"Resources"`
