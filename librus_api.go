@@ -93,6 +93,7 @@ func (l *Librus) GetData(url string) (*http.Response, error) {
 	return res, nil
 }
 
+// GetLuckyNumber returns lucky number for certain day
 func (l *Librus) GetLuckyNumber() (*LuckyNumber, error) {
 	res, err := l.GetData("LuckyNumbers")
 	if err != nil {
