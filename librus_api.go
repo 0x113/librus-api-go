@@ -111,7 +111,7 @@ func (l *Librus) GetLuckyNumber() (*LuckyNumber, error) {
 	return luckyNumber.LuckyNumber, nil
 }
 
-func (l *Librus) GetUserInfo() (*User, error) {
+func (l *Librus) GetUserInfo() (*LibrusMe, error) {
 	res, err := l.GetData("Me")
 	if err != nil {
 		return nil, err
@@ -125,5 +125,14 @@ func (l *Librus) GetUserInfo() (*User, error) {
 		return nil, err
 	}
 
-	return userInfo.LibrusMe.User, nil
+	return userInfo.LibrusMe, nil
+}
+
+func (l *Librus) GetUserRealName() (string, error) {
+	userInfo, err := l.GetUserInfo()
+	if err != nil {
+		return "", err
+	}
+
+	return userInfo.User.FirstName + " " + userInfo.User.LastName, nil
 }
