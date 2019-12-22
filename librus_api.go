@@ -110,3 +110,20 @@ func (l *Librus) GetLuckyNumber() (*LuckyNumber, error) {
 
 	return luckyNumber.LuckyNumber, nil
 }
+
+func (l *Librus) GetUserInfo() (*User, error) {
+	res, err := l.GetData("Me")
+	if err != nil {
+		return nil, err
+	}
+	defer res.Body.Close()
+
+	// get user info
+	userInfo := new(UserInfoResponse)
+	err = json.NewDecoder(res.Body).Decode(&userInfo)
+	if err != nil {
+		return nil, err
+	}
+
+	return userInfo.LibrusMe.User, nil
+}
