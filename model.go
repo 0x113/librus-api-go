@@ -18,14 +18,8 @@ type LibrusHeader struct {
 	Value string
 }
 
-type Defaults struct {
-	Resources map[string]interface{} `json:"Resources"`
-	Url       string                 `json:"Url"`
-}
-
 type LuckyNumberResponse struct {
 	LuckyNumber *LuckyNumber `json:"LuckyNumber"`
-	Defaults
 }
 
 type LuckyNumber struct {
@@ -35,17 +29,31 @@ type LuckyNumber struct {
 
 type UserInfoResponse struct {
 	LibrusMe *LibrusMe `json:"Me"`
-	Defaults
 }
 
 type LibrusMe struct {
-	Account map[string]interface{} `json:"Account"`
-	Refresh int										 `json:"Refresh"`
-	User 		*User									 `json:"User"`
-	Class 	map[string]interface{} `json:"Class"`
+	User  *User  `json:"User"`
+	Class *Class `json:"Class"`
 }
 
 type User struct {
 	FirstName string `json:"FirstName"`
 	LastName  string `json:"LastName"`
+}
+
+type Class struct {
+	ID  int
+	Url string
+}
+
+type ClassDetailsResponse struct {
+	ClassDetails *ClassDetails `json:"Class"`
+}
+
+type ClassDetails struct {
+	Number           int    `json:"Number"`
+	Symbol           string `json:"Symbol"`
+	BeginSchoolYear  string `json:"BeginSchoolYear"`
+	EndFirstSemester string `json:"EndFirstSemester"`
+	EndSchoolYear    string `json:"EndSchoolYear"`
 }
