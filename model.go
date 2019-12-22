@@ -42,8 +42,8 @@ type User struct {
 }
 
 type Class struct {
-	ID  int
-	Url string
+	ID  int		 `json:"Id"`
+	Url string `json:"Url"`
 }
 
 type ClassDetailsResponse struct {
