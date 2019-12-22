@@ -18,10 +18,14 @@ type LibrusHeader struct {
 	Value string
 }
 
-type LuckyNumberResponse struct {
-	LuckyNumber *LuckyNumber           `json:"LuckyNumber"`
+type Defaults struct {
 	Resources   map[string]interface{} `json:"Resources"`
 	Url         string                 `json:"Url"`
+}
+
+type LuckyNumberResponse struct {
+	LuckyNumber *LuckyNumber           `json:"LuckyNumber"`
+	Defaults
 }
 
 type LuckyNumber struct {
