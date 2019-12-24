@@ -165,7 +165,7 @@ func (l *Librus) GetUserClass() (*ClassDetails, error) {
 }
 
 // GetUserGrades returns user grades
-func (l *Librus) GetUserGrades() (*[]GradeDetails, error) {
+func (l *Librus) GetUserGrades() ([]*GradeDetails, error) {
 	res, err := l.GetData("Grades")
 	if err != nil {
 		return nil, err
@@ -189,8 +189,11 @@ func (l *Librus) GetUserGrades() (*[]GradeDetails, error) {
 		grade := new(GradeDetails)
 		wg.Add(1)
 
+		// set default grades values
+		grade.GradeDefault = g.GradeDefault
+
 		// get subject
-		go func(subjectID, categoryID int, grade *GradeDetails) {
+		go func(subjectID, categoryID, addedByID int, grade *GradeDetails) {
 			defer wg.Done()
 
 			// SUBJECT
@@ -207,14 +210,21 @@ func (l *Librus) GetUserGrades() (*[]GradeDetails, error) {
 			}
 			grade.Category = category // set grade category
 
+			// ADDED BY
+			addedBy, err := l.GetGradeAddedBy(addedByID)
+			if err != nil {
+				return
+			}
+			grade.AddedBy = addedBy
+
 			// append grade
 			detailedGrades = append(detailedGrades, grade)
-		}(g.Subject.ID, g.Category.ID, grade)
+		}(g.Subject.ID, g.Category.ID, g.AddedBy.ID, grade)
 
 	}
 	wg.Wait()
 
-	return nil, nil
+	return detailedGrades, nil
 }
 
 func (l *Librus) GetGradeSubject(id int) (*Subject, error) {
@@ -249,4 +259,21 @@ func (l *Librus) GetGradeCategory(id int) (*Category, error) {
 	}
 
 	return categoryResponse.Category, nil
+}
+
+func (l *Librus) GetGradeAddedBy(id int) (*User, error) {
+	res, err := l.GetData("Users/" + strconv.Itoa(id))
+	if err != nil {
+		return nil, err
+	}
+	defer res.Body.Close()
+
+	// get AddedBy response
+	addedByResponse := new(AddedByResponse)
+	err = json.NewDecoder(res.Body).Decode(addedByResponse)
+	if err != nil {
+		return nil, err
+	}
+
+	return addedByResponse.AddedBy, nil
 }
