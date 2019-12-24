@@ -193,23 +193,19 @@ func (l *Librus) GetUserGrades() (*[]GradeDetails, error) {
 		go func(subjectID, categoryID int, grade *GradeDetails) {
 			defer wg.Done()
 
-			// SUBJECT //
+			// SUBJECT
 			subject, err := l.GetGradeSubject(subjectID)
 			if err != nil {
 				return
 			}
+			grade.Subject = subject // set grade subject 
 
-			// set grade subject
-			grade.Subject = subject
-
-			// CATEGORY // 
+			// CATEGORY
 			category, err := l.GetGradeCategory(categoryID)
 			if err != nil {
 				return
 			}
-
-			// set grade category
-			grade.Category = category
+			grade.Category = category // set grade category
 
 			// append grade
 			detailedGrades = append(detailedGrades, grade)
