@@ -7,6 +7,7 @@ import (
 	"net/url"
 	"strconv"
 	"strings"
+	"sync"
 )
 
 var host = "https://api.librus.pl/"
@@ -161,4 +162,66 @@ func (l *Librus) GetUserClass() (*ClassDetails, error) {
 	}
 
 	return classDetails.ClassDetails, nil
+}
+
+// GetUserGrades returns user grades
+func (l *Librus) GetUserGrades() (*[]GradeDetails, error) {
+	res, err := l.GetData("Grades")
+	if err != nil {
+		return nil, err
+	}
+	defer res.Body.Close()
+
+	// grades response
+	gradesResponse := new(GradesResponse)
+	err = json.NewDecoder(res.Body).Decode(gradesResponse)
+	if err != nil {
+		return nil, err
+	}
+
+	var wg sync.WaitGroup
+
+	// detailed grades slice
+	var detailedGrades []*GradeDetails
+
+	// get grade subject
+	for _, g := range *gradesResponse.Grades {
+		grade := new(GradeDetails)
+		wg.Add(1)
+
+		// get subject
+		go func(gradeID int, grade *GradeDetails) {
+			defer wg.Done()
+
+			subject, err := l.GetGradeSubject(gradeID)
+			if err != nil {
+				return
+			}
+
+			// set grade subject
+			grade.Subject = subject
+			detailedGrades = append(detailedGrades, grade)
+
+		}(g.Subject.ID, grade)
+
+	}
+	wg.Wait()
+
+	return nil, nil
+}
+
+func (l *Librus) GetGradeSubject(id int) (*Subject, error) {
+	res, err := l.GetData("Subjects/" + strconv.Itoa(id))
+	if err != nil {
+		return nil, err
+	}
+
+	// get subject data
+	subjectResponse := new(SubjectResponse)
+	err = json.NewDecoder(res.Body).Decode(subjectResponse)
+	if err != nil {
+		return nil, err
+	}
+
+	return subjectResponse.Subject, nil
 }

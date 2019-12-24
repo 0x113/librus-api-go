@@ -32,8 +32,8 @@ type UserInfoResponse struct {
 }
 
 type LibrusMe struct {
-	User  *User  `json:"User"`
-	Class *Class `json:"Class"`
+	User  *User              `json:"User"`
+	Class *ResourceReference `json:"Class"`
 }
 
 type User struct {
@@ -41,8 +41,8 @@ type User struct {
 	LastName  string `json:"LastName"`
 }
 
-type Class struct {
-	ID  int		 `json:"Id"`
+type ResourceReference struct {
+	ID  int    `json:"Id"`
 	Url string `json:"Url"`
 }
 
@@ -56,4 +56,44 @@ type ClassDetails struct {
 	BeginSchoolYear  string `json:"BeginSchoolYear"`
 	EndFirstSemester string `json:"EndFirstSemester"`
 	EndSchoolYear    string `json:"EndSchoolYear"`
+}
+
+type GradesResponse struct {
+	Grades *[]Grade
+}
+
+type Grade struct {
+	Subject               *ResourceReference `json:"Subject"`
+	Category              *ResourceReference `json:"Category"`
+	AddedBy               *ResourceReference `json:"AddedBy"`
+	Grade                 string             `json:"Grade"`
+	Date                  string             `json:"Date"`
+	AddDate               string             `json:"AddDate"`
+	Semester              uint8              `json:"Semester"`
+	IsConstituent         bool               `json:"IsConstituent"`
+	IsSemester            bool               `json:"IsSemester"`
+	IsSemesterProposition bool               `json:"IsSemesterProposition"`
+	IsFinal               bool               `json:"IsFinal"`
+	IsFinalProposition    bool               `json:"IsFinalProposition"`
+}
+
+type GradeDetails struct {
+	Subject               *Subject `json:"Subject"`
+	Grade                 string   `json:"Grade"`
+	Date                  string   `json:"Date"`
+	AddDate               string   `json:"AddDate"`
+	Semester              uint8    `json:"Semester"`
+	IsConstituent         bool     `json:"IsConstituent"`
+	IsSemester            bool     `json:"IsSemester"`
+	IsSemesterProposition bool     `json:"IsSemesterProposition"`
+	IsFinal               bool     `json:"IsFinal"`
+	IsFinalProposition    bool     `json:"IsFinalProposition"`
+}
+
+type SubjectResponse struct {
+	Subject *Subject `json:"Subject"`
+}
+
+type Subject struct {
+	Name string `json:"Name"`
 }
