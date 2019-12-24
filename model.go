@@ -78,16 +78,17 @@ type Grade struct {
 }
 
 type GradeDetails struct {
-	Subject               *Subject `json:"Subject"`
-	Grade                 string   `json:"Grade"`
-	Date                  string   `json:"Date"`
-	AddDate               string   `json:"AddDate"`
-	Semester              uint8    `json:"Semester"`
-	IsConstituent         bool     `json:"IsConstituent"`
-	IsSemester            bool     `json:"IsSemester"`
-	IsSemesterProposition bool     `json:"IsSemesterProposition"`
-	IsFinal               bool     `json:"IsFinal"`
-	IsFinalProposition    bool     `json:"IsFinalProposition"`
+	Subject               *Subject  `json:"Subject"`
+	Category 							*Category `json:"Category"`
+	Grade                 string    `json:"Grade"`
+	Date                  string    `json:"Date"`
+	AddDate               string    `json:"AddDate"`
+	Semester              uint8     `json:"Semester"`
+	IsConstituent         bool      `json:"IsConstituent"`
+	IsSemester            bool      `json:"IsSemester"`
+	IsSemesterProposition bool      `json:"IsSemesterProposition"`
+	IsFinal               bool      `json:"IsFinal"`
+	IsFinalProposition    bool      `json:"IsFinalProposition"`
 }
 
 type SubjectResponse struct {
@@ -95,5 +96,13 @@ type SubjectResponse struct {
 }
 
 type Subject struct {
+	Name string `json:"Name"`
+}
+
+type CategoryResponse struct {
+	Category *Category `json:"Category"`
+}
+
+type Category struct {
 	Name string `json:"Name"`
 }
