@@ -65,7 +65,6 @@ func (l *Librus) Login() error {
 	}
 
 	// change authorization header
-	fmt.Println(okResponse.AccessToken)
 	Headers[0].Value = "Bearer " + okResponse.AccessToken
 
 	return nil
