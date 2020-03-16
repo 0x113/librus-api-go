@@ -38,12 +38,16 @@ Returns user's info, also teacher's info like first name and last name.
 
 ## TODO
 - [x] Lucky number
-- [x] Student Info
+- [x] Student info
 - [x] Subject info
 - [x] Student grades
+- [ ] School info
 - [ ] Attendances
 - [ ] Messages
 - [ ] Timetable
+- [ ] Class free days
+- [ ] Behaviour grades
+- [ ] Parent teacher conferences
 - [ ] What's new since last login
 - [ ] Return in json format
 
