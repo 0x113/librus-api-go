@@ -14,7 +14,7 @@ var host = "https://api.librus.pl/"
 
 var Headers = []LibrusHeader{
 	{
-		Key: "Authorization",
+		Key:   "Authorization",
 		Value: "Basic Mjg6ODRmZGQzYTg3YjAzZDNlYTZmZmU3NzdiNThiMzMyYjE=",
 	},
 	{
@@ -65,6 +65,7 @@ func (l *Librus) Login() error {
 	}
 
 	// change authorization header
+	fmt.Println(okResponse.AccessToken)
 	Headers[0].Value = "Bearer " + okResponse.AccessToken
 
 	return nil
@@ -74,10 +75,10 @@ func (l *Librus) Login() error {
 func (l *Librus) GetData(url string) (*http.Response, error) {
 	// new http client
 	client := &http.Client{}
-	
+
 	// request
 	req, err := http.NewRequest("GET", host+"2.0/"+url, nil)
-	// add headers 
+	// add headers
 	for _, h := range Headers {
 		req.Header.Set(h.Key, h.Value)
 	}
@@ -197,11 +198,11 @@ func (l *Librus) GetUserGrades() ([]*GradeDetails, error) {
 			defer wg.Done()
 
 			// SUBJECT
-			subject, err := l.GetGradeSubject(subjectID)
+			subject, err := l.GetSubject(subjectID)
 			if err != nil {
 				return
 			}
-			grade.Subject = subject // set grade subject 
+			grade.Subject = subject // set grade subject
 
 			// CATEGORY
 			category, err := l.GetGradeCategory(categoryID)
@@ -211,7 +212,7 @@ func (l *Librus) GetUserGrades() ([]*GradeDetails, error) {
 			grade.Category = category // set grade category
 
 			// ADDED BY
-			addedBy, err := l.GetGradeAddedBy(addedByID)
+			addedBy, err := l.GetUser(addedByID)
 			if err != nil {
 				return
 			}
@@ -227,7 +228,7 @@ func (l *Librus) GetUserGrades() ([]*GradeDetails, error) {
 	return detailedGrades, nil
 }
 
-func (l *Librus) GetGradeSubject(id int) (*Subject, error) {
+func (l *Librus) GetSubject(id int) (*Subject, error) {
 	res, err := l.GetData("Subjects/" + strconv.Itoa(id))
 	if err != nil {
 		return nil, err
@@ -261,7 +262,7 @@ func (l *Librus) GetGradeCategory(id int) (*Category, error) {
 	return categoryResponse.Category, nil
 }
 
-func (l *Librus) GetGradeAddedBy(id int) (*User, error) {
+func (l *Librus) GetUser(id int) (*User, error) {
 	res, err := l.GetData("Users/" + strconv.Itoa(id))
 	if err != nil {
 		return nil, err
@@ -276,4 +277,14 @@ func (l *Librus) GetGradeAddedBy(id int) (*User, error) {
 	}
 
 	return addedByResponse.AddedBy, nil
+}
+
+func (l *Librus) GetAttendance() (error, error) {
+	// Types
+	// 1   - nieobocność
+	// 2   - spóźnienie
+	// 3   - nieobocność usp.
+	// 4   - zwolnienie
+	// 100 - obecność
+	return nil, nil
 }
