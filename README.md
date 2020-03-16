@@ -43,6 +43,8 @@ Returns user's info, also teacher's info like first name and last name.
 - [x] Student grades
 - [ ] Attendances
 - [ ] Messages
+- [ ] Timetable
+- [ ] What's new since last login
 - [ ] Return in json format
 
 ## Projects using this API client
