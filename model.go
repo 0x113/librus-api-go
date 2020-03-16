@@ -36,6 +36,10 @@ type LibrusMe struct {
 	Class *ResourceReference `json:"Class"`
 }
 
+type UserResponse struct {
+	User *User `json:"User"`
+}
+
 type User struct {
 	FirstName string `json:"FirstName"`
 	LastName  string `json:"LastName"`
@@ -63,28 +67,28 @@ type GradesResponse struct {
 }
 
 type GradeDefault struct {
-	Grade                 string             `json:"Grade"`
-	Date                  string             `json:"Date"`
-	AddDate               string             `json:"AddDate"`
-	Semester              uint8              `json:"Semester"`
-	IsConstituent         bool               `json:"IsConstituent"`
-	IsSemester            bool               `json:"IsSemester"`
-	IsSemesterProposition bool               `json:"IsSemesterProposition"`
-	IsFinal               bool               `json:"IsFinal"`
-	IsFinalProposition    bool               `json:"IsFinalProposition"`
+	Grade                 string `json:"Grade"`
+	Date                  string `json:"Date"`
+	AddDate               string `json:"AddDate"`
+	Semester              uint8  `json:"Semester"`
+	IsConstituent         bool   `json:"IsConstituent"`
+	IsSemester            bool   `json:"IsSemester"`
+	IsSemesterProposition bool   `json:"IsSemesterProposition"`
+	IsFinal               bool   `json:"IsFinal"`
+	IsFinalProposition    bool   `json:"IsFinalProposition"`
 }
 
 type Grade struct {
-	Subject               *ResourceReference `json:"Subject"`
-	Category              *ResourceReference `json:"Category"`
-	AddedBy               *ResourceReference `json:"AddedBy"`
+	Subject  *ResourceReference `json:"Subject"`
+	Category *ResourceReference `json:"Category"`
+	AddedBy  *ResourceReference `json:"AddedBy"`
 	GradeDefault
 }
 
 type GradeDetails struct {
-	Subject               *Subject  `json:"Subject"`
-	Category 							*Category `json:"Category"`
-	AddedBy 							*User 		`json:"AddedBy"`
+	Subject  *Subject  `json:"Subject"`
+	Category *Category `json:"Category"`
+	AddedBy  *User     `json:"AddedBy"`
 	GradeDefault
 }
 
