@@ -37,10 +37,10 @@ Returns user's info, also teacher's info like first name and last name.
 
 
 ## TODO
-[x] Lucky number
-[x] Student Info
-[x] Subject info
-[x] Student grades
+[X] Lucky number
+[X] Student Info
+[X] Subject info
+[X] Student grades
 [ ] Attendances
 [ ] Messages
 [ ] Return in json format
