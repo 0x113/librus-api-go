@@ -111,3 +111,38 @@ type Category struct {
 type AddedByResponse struct {
 	AddedBy *User `json:"User"`
 }
+
+type AttendanceResponse struct {
+	Attendances []*AttendanceResponseObject `json:"Attendances"`
+}
+
+type AttendanceResponseObject struct {
+	Lesson  *ResourceReference `json:"Lesson"`
+	Type    *ResourceReference `json:"Type"`
+	AddedBy *ResourceReference `json:"AddedBy"`
+	Attendance
+}
+
+type Attendance struct {
+	Date     string `json:"Date"`
+	AddDate  string `json:"AddDate"`
+	LessonNo int    `json:"LessonNo"`
+	Semester int    `json:"Semester"`
+}
+
+type AttendanceDetails struct {
+	Type    string   `json:"Type"`
+	AddedBy *User    `json:"AddedBy"`
+	Subject *Subject `json:"Subject"`
+	Attendance
+}
+
+type LessonResponse struct {
+	Lesson *Lesson `json:"Lesson"`
+}
+
+type Lesson struct {
+	Teacher *ResourceReference `json:"Teacher"`
+	Subject *ResourceReference `json:"Subject"`
+	Class   *ResourceReference `json:"Class"`
+}

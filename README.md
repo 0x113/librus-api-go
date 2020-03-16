@@ -42,7 +42,7 @@ Returns user's info, also teacher's info like first name and last name.
 - [x] Subject info
 - [x] Student grades
 - [ ] School info
-- [ ] Attendances
+- [x] Attendances
 - [ ] Messages
 - [ ] Timetable
 - [ ] Class free days
