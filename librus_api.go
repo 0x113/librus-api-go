@@ -227,6 +227,7 @@ func (l *Librus) GetUserGrades() ([]*GradeDetails, error) {
 	return detailedGrades, nil
 }
 
+// GetSubject name
 func (l *Librus) GetSubject(id int) (*Subject, error) {
 	res, err := l.GetData("Subjects/" + strconv.Itoa(id))
 	if err != nil {
@@ -244,6 +245,7 @@ func (l *Librus) GetSubject(id int) (*Subject, error) {
 	return subjectResponse.Subject, nil
 }
 
+// GetGradeCategory name
 func (l *Librus) GetGradeCategory(id int) (*Category, error) {
 	res, err := l.GetData("Grades/Categories/" + strconv.Itoa(id))
 	if err != nil {
@@ -261,6 +263,7 @@ func (l *Librus) GetGradeCategory(id int) (*Category, error) {
 	return categoryResponse.Category, nil
 }
 
+// GetUser info like first name and last name
 func (l *Librus) GetUser(id int) (*User, error) {
 	res, err := l.GetData("Users/" + strconv.Itoa(id))
 	if err != nil {
@@ -278,6 +281,7 @@ func (l *Librus) GetUser(id int) (*User, error) {
 	return addedByResponse.AddedBy, nil
 }
 
+// GetLesson info like teacher, subject and class
 func (l *Librus) GetLesson(id int) (*Lesson, error) {
 	res, err := l.GetData("Lessons/" + strconv.Itoa(id))
 	if err != nil {
@@ -294,6 +298,7 @@ func (l *Librus) GetLesson(id int) (*Lesson, error) {
 	return lessonResponse.Lesson, nil
 }
 
+// GetAttendance retruns list of attendance data like date, lesson number, semester etc
 func (l *Librus) GetAttendance() ([]*AttendanceDetails, error) {
 	// Types
 	// 1   - nieobecność
