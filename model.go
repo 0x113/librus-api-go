@@ -146,3 +146,15 @@ type Lesson struct {
 	Subject *ResourceReference `json:"Subject"`
 	Class   *ResourceReference `json:"Class"`
 }
+
+type SchoolResponse struct {
+	School *School `json:"School"`
+}
+
+type School struct {
+	Name           string `json:"Name"`
+	Town           string `json:"Town"`
+	Street         string `json:"Street"`
+	State          string `json:"State"`
+	BuildingNumber string `json:"BuildingNumber"`
+}
