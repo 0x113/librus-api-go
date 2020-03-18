@@ -105,7 +105,7 @@ func (l *Librus) GetLuckyNumber() (*LuckyNumber, error) {
 
 	// get lucky number
 	luckyNumber := new(LuckyNumberResponse)
-	err = json.NewDecoder(res.Body).Decode(&luckyNumber)
+	err = json.NewDecoder(res.Body).Decode(luckyNumber)
 	if err != nil {
 		return nil, err
 	}
@@ -122,7 +122,7 @@ func (l *Librus) GetUserInfo() (*LibrusMe, error) {
 
 	// get user info
 	userInfo := new(UserInfoResponse)
-	err = json.NewDecoder(res.Body).Decode(&userInfo)
+	err = json.NewDecoder(res.Body).Decode(userInfo)
 	if err != nil {
 		return nil, err
 	}
@@ -156,7 +156,7 @@ func (l *Librus) GetUserClass() (*ClassDetails, error) {
 
 	// get class details
 	classDetails := new(ClassDetailsResponse)
-	err = json.NewDecoder(res.Body).Decode(&classDetails)
+	err = json.NewDecoder(res.Body).Decode(classDetails)
 	if err != nil {
 		return nil, err
 	}
