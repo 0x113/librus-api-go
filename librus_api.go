@@ -386,8 +386,8 @@ func (l *Librus) GetSchoolInfo() (*School, error) {
 	return schoolResponse.School, nil
 }
 
-// GetClassFreeTypes returns list of all reasons why class had a free day
-func (l *Librus) GetClassFreeTypes() ([]*Type, error) {
+// GetClassFreeDaysTypes returns list of all reasons why class had a free day
+func (l *Librus) GetClassFreeDaysTypes() ([]*Type, error) {
 	res, err := l.GetData("ClassFreeDays/Types")
 	if err != nil {
 		return nil, err
