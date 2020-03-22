@@ -158,3 +158,12 @@ type School struct {
 	State          string `json:"State"`
 	BuildingNumber string `json:"BuildingNumber"`
 }
+
+type TypesResponse struct {
+	Types []*Type `json:"Types"`
+}
+
+type Type struct {
+	ID   int    `json:"ID"`
+	Name string `json:"Name"`
+}
