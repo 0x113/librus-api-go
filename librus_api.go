@@ -418,6 +418,7 @@ func (l *Librus) GetClassFreeDayTypeById(id int) (*Type, error) {
 	return response.Types[0], nil
 }
 
+// GetClassFreeDays returns list of all class free days
 func (l *Librus) GetClassFreeDays() ([]*ClassFreeDay, error) {
 	res, err := l.GetData("ClassFreeDays")
 	if err != nil {
