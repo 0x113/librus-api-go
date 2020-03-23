@@ -167,3 +167,22 @@ type Type struct {
 	ID   int    `json:"ID"`
 	Name string `json:"Name"`
 }
+
+type ClassFreeDaysResponse struct {
+	ClassFreeDays []*ClassFreeDayObject `json:"ClassFreeDays"`
+}
+
+type ClassFreeDayObject struct {
+	Type *Type `json:"Type"`
+	ClassFreeDayDefault
+}
+
+type ClassFreeDayDefault struct {
+	DateFrom string `json:"DateFrom"`
+	DateTo   string `json:"DateTo"`
+}
+
+type ClassFreeDay struct {
+	Type *Type `json:"Type"`
+	ClassFreeDayDefault
+}
