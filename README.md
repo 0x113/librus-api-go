@@ -46,6 +46,8 @@ Returns user's info, also teacher's info like first name and last name.
 - [ ] Messages
 - [ ] Timetable
 - [ ] Class free days
+	* [x] Get all class free days
+	* [ ] Filter data to get only for specific class
 - [ ] Behaviour grades
 - [ ] Parent teacher conferences
 - [ ] What's new since last login
