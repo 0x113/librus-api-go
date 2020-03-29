@@ -186,3 +186,25 @@ type ClassFreeDay struct {
 	Type *Type `json:"Type"`
 	ClassFreeDayDefault
 }
+
+type TimetableEntriesResponse struct {
+	Entries []*TimetableEntryObject `json:"TimetableEntries"`
+}
+
+type TimetableEntryObject struct {
+	Lesson *ResourceReference `json:"Lesson"`
+	TimetableEntryDefault
+}
+
+type TimetableEntryDefault struct {
+	DateFrom     string `json:"DateFrom"`
+	DateTo       string `json:"DateTo"`
+	DayOfTheWeek int    `json:"DayOfTheWeek"`
+	LessonNo     int    `json:"LessonNo"`
+}
+
+type TimetableEntry struct {
+	Subject *Subject `json:"Subject"`
+	Teacher *User    `json:"Teacher"`
+	TimetableEntryDefault
+}

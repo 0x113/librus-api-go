@@ -44,7 +44,8 @@ Returns user's info, also teacher's info like first name and last name.
 - [x] School info
 - [x] Attendances
 - [ ] Messages
-- [ ] Timetable
+- [x] Timetable
+	* [ ] Get classrooms
 - [ ] Class free days
 	* [x] Get all class free days
 	* [ ] Filter data to get only for specific class
