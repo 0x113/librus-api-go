@@ -36,6 +36,34 @@ Returns grade category name
 Returns user's info, also teacher's info like first name and last name.
 
 
+## Demo
+```
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	client := &Librus{
+		Username: "student username", // only student, ends with "u", e.g. "1111111u"
+		Password: "student password",
+	}
+
+	if err := client.Login(); err != nil {
+		panic(err)
+	}
+
+	// here you can call any other method
+	luckyNumber, err := client.GetLuckyNumber()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Date: %s, lucky number: %d\n", luckyNumber.LuckyNumberDay, luckyNumber.LuckyNumber)
+}
+```
+
+
 ## TODO
 - [x] Lucky number
 - [x] Student info
