@@ -37,7 +37,7 @@ Returns user's info, also teacher's info like first name and last name.
 
 
 ## Demo
-```
+```go
 package main
 
 import (
