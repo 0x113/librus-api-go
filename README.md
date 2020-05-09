@@ -7,7 +7,7 @@
 2. Create new session via `Login` method
 3. Call any other method ([List of available methods](#methods))
 
-## Demo
+## Basic example
 ```go
 package main
 
@@ -32,7 +32,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("Date: %s, lucky number: %d\n", luckyNumber.LuckyNumberDay, luckyNumber.LuckyNumber)
+	fmt.Printf("Date: %s, lucky number: %d", luckyNumber.LuckyNumberDay, luckyNumber.LuckyNumber)
+	// output: Date: 2020-03-12, lucky number: 12
 }
 ```
 
@@ -48,12 +49,12 @@ Returns lucky number and date of it
 <p>
 
 ```go
-// CREATE SESSION BEFORE [see demo section for details]
+// CREATE SESSION BEFORE [see basic example for details]
 luckyNumber, err := client.GetLuckyNumber()
 if err != nil {
 	panic(err)
 }
-fmt.Printf("Date: %s, lucky number: %d\n", luckyNumber.LuckyNumberDay, luckyNumber.LuckyNumber)
+fmt.Printf("Date: %s, lucky number: %d", luckyNumber.LuckyNumberDay, luckyNumber.LuckyNumber)
 // output: Date: 2020-03-12, lucky number: 12
 ```
 
@@ -67,7 +68,7 @@ Returns user's first and last name
 <p>
 
 ```go
-// CREATE SESSION BEFORE [see demo section for details]
+// CREATE SESSION BEFORE [see basic example for details]
 fullName, err := client.GetUserRealName()
 if err != nil {
 	panic(err)
@@ -86,7 +87,7 @@ Returns new <a href="https://github.com/0x113/librus-api-go/blob/2698f602c640fa9
 <p>
 
 ```go
-// CREATE SESSION BEFORE [see demo section for details]
+// CREATE SESSION BEFORE [see basic example for details]
 classDetails, err := client.GetUserClass()
 if err != nil {
 	panic(err)
@@ -110,7 +111,7 @@ Returns info about every grade. Check <a href="https://github.com/0x113/librus-a
 <p>
 
 ```go
-// CREATE SESSION BEFORE [see demo section for details]
+// CREATE SESSION BEFORE [see basic example for details]
 userGrades, err := client.GetUserGrades()
 if err != nil {
 	panic(err)
@@ -135,7 +136,7 @@ Returns subject name.
 <p>
 
 ```go
-// CREATE SESSION BEFORE [see demo section for details]
+// CREATE SESSION BEFORE [see basic example for details]
 subject, err := client.GetSubject(12300212)
 if err != nil {
 	panic(err)
@@ -155,7 +156,7 @@ Returns grade category name
 <p>
 
 ```go
-// CREATE SESSION BEFORE [see demo section for details]
+// CREATE SESSION BEFORE [see basic example for details]
 category, err := client.GetCategory(12300212)
 if err != nil {
 	panic(err)
@@ -175,7 +176,7 @@ Returns user's info, also teacher's info like first name and last name.
 <p>
 
 ```go
-// CREATE SESSION BEFORE [see demo section for details]
+// CREATE SESSION BEFORE [see basic example for details]
 userInfo, err := client.GetUser(12300212)
 if err != nil {
 	panic(err)
