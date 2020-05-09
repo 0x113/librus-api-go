@@ -228,10 +228,10 @@ func (l *Librus) GetUserGrades() ([]*GradeDetails, error) {
 }
 
 // GetSubject name
-func (l *Librus) GetSubject(id int) (*Subject, error) {
+func (l *Librus) GetSubject(id int) (string, error) {
 	res, err := l.GetData("Subjects/" + strconv.Itoa(id))
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 	defer res.Body.Close()
 
@@ -239,17 +239,17 @@ func (l *Librus) GetSubject(id int) (*Subject, error) {
 	subjectResponse := new(SubjectResponse)
 	err = json.NewDecoder(res.Body).Decode(subjectResponse)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 
-	return subjectResponse.Subject, nil
+	return subjectResponse.Subject.Name, nil
 }
 
 // GetGradeCategory name
-func (l *Librus) GetGradeCategory(id int) (*Category, error) {
+func (l *Librus) GetGradeCategory(id int) (string, error) {
 	res, err := l.GetData("Grades/Categories/" + strconv.Itoa(id))
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 	defer res.Body.Close()
 
@@ -257,10 +257,10 @@ func (l *Librus) GetGradeCategory(id int) (*Category, error) {
 	categoryResponse := new(CategoryResponse)
 	err = json.NewDecoder(res.Body).Decode(categoryResponse)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 
-	return categoryResponse.Category, nil
+	return categoryResponse.Category.Name, nil
 }
 
 // GetUser info like first name and last name

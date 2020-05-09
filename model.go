@@ -86,9 +86,9 @@ type Grade struct {
 }
 
 type GradeDetails struct {
-	Subject  *Subject  `json:"Subject"`
-	Category *Category `json:"Category"`
-	AddedBy  *User     `json:"AddedBy"`
+	Subject  string `json:"Subject"`
+	Category string `json:"Category"`
+	AddedBy  *User  `json:"AddedBy"`
 	GradeDefault
 }
 
@@ -131,9 +131,9 @@ type Attendance struct {
 }
 
 type AttendanceDetails struct {
-	Type    string   `json:"Type"`
-	AddedBy *User    `json:"AddedBy"`
-	Subject *Subject `json:"Subject"`
+	Type    string `json:"Type"`
+	AddedBy *User  `json:"AddedBy"`
+	Subject string `json:"Subject"`
 	Attendance
 }
 
@@ -204,7 +204,7 @@ type TimetableEntryDefault struct {
 }
 
 type TimetableEntry struct {
-	Subject *Subject `json:"Subject"`
-	Teacher *User    `json:"Teacher"`
+	Subject string `json:"Subject"`
+	Teacher *User  `json:"Teacher"`
 	TimetableEntryDefault
 }
