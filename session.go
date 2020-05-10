@@ -8,6 +8,8 @@ import (
 	"strings"
 )
 
+var host = "https://api.librus.pl/"
+
 var Headers = []LibrusHeader{
 	{
 		Key:   "Authorization",
