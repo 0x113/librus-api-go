@@ -13,12 +13,15 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 
 	golibrus "github.com/0x113/librus-api-go"
 )
 
 func main() {
+	httpClient := &http.Client{}
 	client := &golibrus.Librus{
+		Client: httpClient,
 		Username: "student username", // only student, ends with "u", e.g. "1111111u"
 		Password: "student password",
 	}
