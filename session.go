@@ -21,15 +21,17 @@ var Headers = []LibrusHeader{
 	},
 }
 
+// HTTPClient represents http client :)
+type HTTPClient interface {
+	Do(req *http.Request) (*http.Response, error)
+}
+
 func (l *Librus) CreateSession() error {
 	postData := url.Values{}
 	postData.Set("username", l.Username)
 	postData.Set("password", l.Password)
 	postData.Set("librus_long_term_token", "1")
 	postData.Set("grant_type", "password")
-
-	// new http client
-	client := &http.Client{}
 
 	// request
 	req, err := http.NewRequest("POST", host+"OAuth/Token", strings.NewReader(postData.Encode()))
@@ -43,7 +45,7 @@ func (l *Librus) CreateSession() error {
 	}
 
 	// response
-	res, err := client.Do(req)
+	res, err := l.Client.Do(req)
 	if err != nil {
 		return err
 	}
@@ -69,9 +71,6 @@ func (l *Librus) CreateSession() error {
 
 // GetData returns data from url e.g. https://api.librus.pl/2.0/LuckyNumbers
 func (l *Librus) GetData(url string) (*http.Response, error) {
-	// new http client
-	client := &http.Client{}
-
 	// request
 	req, err := http.NewRequest("GET", host+"2.0/"+url, nil)
 	// add headers
@@ -83,11 +82,5 @@ func (l *Librus) GetData(url string) (*http.Response, error) {
 		return nil, err
 	}
 
-	// response
-	res, err := client.Do(req)
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
+	return l.Client.Do(req)
 }

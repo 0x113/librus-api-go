@@ -1,6 +1,7 @@
 package librus_api_go
 
 type Librus struct {
+	Client   HTTPClient
 	Username string
 	Password string
 }
