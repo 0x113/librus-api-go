@@ -58,7 +58,7 @@ func (l *Librus) CreateSession() error {
 
 	// decode json response
 	okResponse := new(OKResponse)
-	err = json.NewDecoder(res.Body).Decode(&okResponse)
+	err = json.NewDecoder(res.Body).Decode(okResponse)
 	if err != nil {
 		return err
 	}
