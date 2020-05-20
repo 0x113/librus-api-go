@@ -2,6 +2,7 @@ package librus_api_go
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -75,6 +76,9 @@ func (l *Librus) GetData(url string) (*http.Response, error) {
 	req, err := http.NewRequest("GET", host+"2.0/"+url, nil)
 	// add headers
 	for _, h := range Headers {
+		if h.Key == "Authorization" && !strings.HasPrefix(h.Value, "Bearer ") {
+			return nil, errors.New("Wrong authorization header, should be Bearer not Basic")
+		}
 		req.Header.Set(h.Key, h.Value)
 	}
 
