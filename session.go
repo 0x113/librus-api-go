@@ -77,7 +77,7 @@ func (l *Librus) GetData(url string) (*http.Response, error) {
 	// add headers
 	for _, h := range Headers {
 		if h.Key == "Authorization" && !strings.HasPrefix(h.Value, "Bearer ") {
-			return nil, errors.New("Wrong authorization header, should be Bearer not Basic")
+			return nil, errors.New("Wrong authorization header, should be Bearer")
 		}
 		req.Header.Set(h.Key, h.Value)
 	}
