@@ -36,7 +36,7 @@ func TestSuccessGetLuckyNumber(t *testing.T) {
 func TestFailGetLuckyNumber(t *testing.T) {
 	client := &mocks.MockClient{
 		DoFunc: func(req *http.Request) (*http.Response, error) {
-			json := `{"LuckyNumber": "1", "LuckyNumberDay": "2029-01-93"}` // invalid json
+			json := `{"LuckyNumber": "1", "LuckyNumberDay": "2029-01-93"}` // invalid json (LuckyNumber is string instead of int)
 			return &http.Response{
 				StatusCode: http.StatusInternalServerError,
 				Body:       ioutil.NopCloser(bytes.NewReader([]byte(json))),
