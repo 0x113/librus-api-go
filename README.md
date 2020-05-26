@@ -2,6 +2,9 @@
 	<img src="https://imgur.com/XDq2eiP.png">
 </h1>
 <img src="https://travis-ci.com/0x113/librus-api-go.svg?branch=master">
+<img src="https://img.shields.io/codefactor/grade/github/0x113/librus-api-go/master">
+<img src="https://img.shields.io/github/repo-size/0x113/librus-api-go">
+<img src="https://img.shields.io/github/go-mod/go-version/0x113/librus-api-go">
 
 ## Usage
 1. Create new instance of `Librus` struct with student's username and password
