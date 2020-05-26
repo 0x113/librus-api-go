@@ -35,7 +35,7 @@ func TestSuccessGetSubject(t *testing.T) {
 func TestFailGetSubject(t *testing.T) {
 	client := &mocks.MockClient{
 		DoFunc: func(req *http.Request) (*http.Response, error) {
-			json := `{"Subject": {"SubjectName": "Math"}}` // invalid json (SubjectName should be nammed Name)
+			json := `` // invalid json
 			return &http.Response{
 				StatusCode: http.StatusOK,
 				Body:       ioutil.NopCloser(bytes.NewReader([]byte(json))),
@@ -48,6 +48,6 @@ func TestFailGetSubject(t *testing.T) {
 	golibrus.Headers[0].Value = "Bearer HESOYAM"
 
 	subject, err := l.GetSubject(123)
-	assert.Nil(t, err)
+	assert.NotNil(t, err)
 	assert.Empty(t, subject)
 }
