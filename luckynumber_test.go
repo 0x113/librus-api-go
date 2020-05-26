@@ -52,3 +52,21 @@ func TestFailGetLuckyNumber(t *testing.T) {
 	assert.NotNil(t, err)
 	assert.Nil(t, luckyNumber)
 }
+
+func TestInternalServerErrorGetLuckyNumber(t *testing.T) {
+	client := &mocks.MockClient{
+		DoFunc: func(req *http.Request) (*http.Response, error) {
+			return &http.Response{
+				StatusCode: http.StatusInternalServerError,
+			}, nil
+		},
+	}
+	l := &golibrus.Librus{Client: client}
+
+	// set authorization token
+	golibrus.Headers[0].Value = "Bearer HESOYAM"
+
+	luckyNumber, err := l.GetLuckyNumber()
+	assert.NotNil(t, err)
+	assert.Nil(t, luckyNumber)
+}
