@@ -17,7 +17,8 @@ func TestSuccessGetSchoolInfo(t *testing.T) {
 		DoFunc: func(req *http.Request) (*http.Response, error) {
 			json := `{"School": {"Name": "Cool school", "Town": "Cracow", "Street": "Sezamkowa", "State": "-", "BuildingNumber": "12"}}`
 			return &http.Response{
-				Body: ioutil.NopCloser(bytes.NewReader([]byte(json))),
+				StatusCode: http.StatusOK,
+				Body:       ioutil.NopCloser(bytes.NewReader([]byte(json))),
 			}, nil
 		},
 	}
@@ -44,7 +45,8 @@ func TestFailGetSchoolInfo(t *testing.T) {
 		DoFunc: func(req *http.Request) (*http.Response, error) {
 			json := `{"School": {"Name": "Cool school", "Town": "Cracow", "Street": "Sezamkowa", "State": "-", "BuildingNumber": 12}}` // invalid json (BuildingNumber should be string not int)
 			return &http.Response{
-				Body: ioutil.NopCloser(bytes.NewReader([]byte(json))),
+				StatusCode: http.StatusOK,
+				Body:       ioutil.NopCloser(bytes.NewReader([]byte(json))),
 			}, nil
 		},
 	}
