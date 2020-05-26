@@ -86,5 +86,10 @@ func (l *Librus) GetData(url string) (*http.Response, error) {
 		return nil, err
 	}
 
-	return l.Client.Do(req)
+	res, err := l.Client.Do(req)
+	if res.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("Error status code, wanted: %v, got: %v", http.StatusOK, res.StatusCode)
+	}
+
+	return res, nil
 }
