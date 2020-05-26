@@ -1,6 +1,7 @@
 <h1 align="center">
-<img src="https://imgur.com/XDq2eiP.png">
+	<img src="https://imgur.com/XDq2eiP.png">
 </h1>
+<img src="https://travis-ci.com/0x113/librus-api-go.svg?branch=master">
 
 ## Usage
 1. Create new instance of `Librus` struct with student's username and password
