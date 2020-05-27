@@ -39,7 +39,7 @@ func TestSuccessGetUser(t *testing.T) {
 func TestFailGetUser(t *testing.T) {
 	client := &mocks.MockClient{
 		DoFunc: func(req *http.Request) (*http.Response, error) {
-			json := `{}` // invalid json
+			json := `{"User": 1}` // invalid json
 			return &http.Response{
 				StatusCode: http.StatusOK,
 				Body:       ioutil.NopCloser(bytes.NewReader([]byte(json))),
@@ -52,6 +52,6 @@ func TestFailGetUser(t *testing.T) {
 	golibrus.Headers[0].Value = "Bearer HESOYAM"
 
 	user, err := l.GetUser(123)
-	assert.Nil(t, err)
+	assert.NotNil(t, err)
 	assert.Nil(t, user)
 }
