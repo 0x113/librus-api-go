@@ -41,7 +41,7 @@ func TestSuccessGetLesson(t *testing.T) {
 func TestFailGetLesson(t *testing.T) {
 	client := &mocks.MockClient{
 		DoFunc: func(req *http.Request) (*http.Response, error) {
-			json := `{"Teacher": "John Doe", "Subject": "Math", "Class": "3e"}` // invalid json
+			json := `` // invalid json
 			return &http.Response{
 				StatusCode: http.StatusOK,
 				Body:       ioutil.NopCloser(bytes.NewReader([]byte(json))),
@@ -54,6 +54,24 @@ func TestFailGetLesson(t *testing.T) {
 	golibrus.Headers[0].Value = "Bearer HESOYAM"
 
 	lesson, err := l.GetLesson(123)
-	assert.Nil(t, err)
+	assert.NotNil(t, err)
+	assert.Nil(t, lesson)
+}
+
+func TestInternalServerErrorGetLesson(t *testing.T) {
+	client := &mocks.MockClient{
+		DoFunc: func(req *http.Request) (*http.Response, error) {
+			return &http.Response{
+				StatusCode: http.StatusInternalServerError,
+			}, nil
+		},
+	}
+	l := &golibrus.Librus{Client: client}
+
+	// set authorization token
+	golibrus.Headers[0].Value = "Bearer HESOYAM"
+
+	lesson, err := l.GetLesson(123)
+	assert.NotNil(t, err)
 	assert.Nil(t, lesson)
 }
