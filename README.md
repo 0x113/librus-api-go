@@ -1,5 +1,5 @@
 <h1 align="center">
-	<img src="https://imgur.com/XDq2eiP.png">
+	<img src="https://i.imgur.com/j2TJmKf.png">
 </h1>
 <p align="center">
 <img src="https://travis-ci.com/0x113/librus-api-go.svg?branch=master">
